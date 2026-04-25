@@ -4,5 +4,11 @@
     "title": "updated title",
     "date": "2026-04-22T15:03:59.657Z",
     "content": "update this content"
+  },
+  {
+    "id": 1,
+    "title": "New title",
+    "date": "2026-04-22T15:37:07.604Z",
+    "content": "This IS New Content"
   }
 ]
