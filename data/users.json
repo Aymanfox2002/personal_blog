@@ -2,5 +2,17 @@
   {
     "username": "Z",
     "hashedPassword": "$2b$10$KvvUBxswVdfmbK4Q8BmSTedqAlhz8De8PYlJ4nvugoQbofGZRjq/a"
+  },
+  {
+    "username": "Ayman",
+    "hashedPassword": "$2b$10$dlKydSBZE0YvsUCyJfk4qu2C1uHbncCno./CE6rWyRXCsyx48.ebK"
+  },
+  {
+    "username": "Basel",
+    "hashedPassword": "$2b$10$6x7zjvZg.Xlf0arnHmhz0.jIVNXtyztOMj4BUVQbYFzlfLXimJOIK"
+  },
+  {
+    "username": "M.Ali",
+    "hashedPassword": "$2b$10$sWPa8NLIll2EjqNRSBUfeO68nfqLV5p792TscIwRyx6Cl.IWeX6MW"
   }
 ]

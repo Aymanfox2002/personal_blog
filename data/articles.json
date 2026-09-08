@@ -6,9 +6,15 @@
     "content": "update this content"
   },
   {
-    "id": 1,
-    "title": "New title",
-    "date": "2026-04-22T15:37:07.604Z",
-    "content": "This IS New Content"
+    "id": 6,
+    "title": "Test me",
+    "date": "2026-08-30T18:47:42.721Z",
+    "content": "Thisisarticlefortest"
+  },
+  {
+    "id": 7,
+    "title": "Test me",
+    "date": "2026-08-30T18:49:16.334Z",
+    "content": "hello node.js"
   }
 ]

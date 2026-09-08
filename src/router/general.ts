@@ -1,12 +1,9 @@
 import express from "express";
-import articlesList from "../../data/articles.json" with { type: "json" };
 import { getArticles, getUsers, usersFile } from "../utils/fileHandler.ts";
 import fs from "fs/promises";
 import bcrypt from "bcrypt";
 
-
 const public_users = express.Router();
-
 
 // register new user
 public_users.post("/register", async (req, res) => {
@@ -22,14 +19,17 @@ public_users.post("/register", async (req, res) => {
     if (isExist) {
       return res.send(`User with name ${username} already exist`);
     }
+
+    // .hash() method is used to hash the password before storing it in the users.json file. The second argument (10) is the salt rounds, which determines the complexity of the hashing algorithm. A higher number means more security but also more processing time.
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
+
     const newUsersList = [...usersList, { username, hashedPassword }];
     await fs.writeFile(usersFile, JSON.stringify(newUsersList, null, 2));
     return res.send("New user added successfully!");
   } catch (error) {
     console.log(error);
   }
-});  
+});
 
 // login user
 public_users.post("/login", async (req, res) => {
@@ -49,10 +49,14 @@ public_users.post("/login", async (req, res) => {
     });
   }
   try {
+    /**
+     * The .compare() method is used to compare the provided password with the hashed password. we use await here because bcrypt.compare() is an asynchronous operation that returns a promise, and we want to wait for the result before proceeding.
+     */
     if (await bcrypt.compare(password, user.hashedPassword)) {
       req.session.userName = username;
       return res.status(200).json({
         message: "Login successful",
+        session: req.session,
       });
     } else {
       return res.status(400).json({
@@ -64,22 +68,21 @@ public_users.post("/login", async (req, res) => {
   }
 });
 
-// get all articles
+// home page
 public_users.get("/", async (req, res) => {
   const data = await getArticles();
-  return res.send(data);
+  res.render("index", data); // Express looks in /views and finds users.ejs
 });
 
 // get article with ID ❗❗
-public_users.get("/articles/:id", (req, res) => {
-  const id = Number(req.params["id"]);
-  articlesList.forEach((ele) => {
-    console.log(ele.id, id);
-    if (ele.id === id) {
-      console.log(ele);
-      return res.send(ele);
-    }
-  });
+public_users.get("/articles/:id", async (req, res) => {
+  const id = Number(req.params.id);
+  const articlesList = await getArticles();
+  const article = articlesList.find((ele: any) => ele.id === id);
+
+  if (article) {
+    return res.send(article);
+  }
   return res.status(404).send(`Article with ID "${id}" not found`);
 });
 

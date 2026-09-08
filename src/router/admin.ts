@@ -30,7 +30,7 @@ admin.post("/add", async (req, res) => {
     fs.writeFile(articlesFile, JSON.stringify(newArticles, null, 2));
     res.json({
       message: "New article added successfully",
-      "new article": newArticle,
+      "new article": newArticle.title,
     });
   } catch (error) {
     console.log(error);
