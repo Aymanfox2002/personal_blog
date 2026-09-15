@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Blog</title>
+    <title>Dashboard</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -43,34 +43,55 @@
             align-items: center;
         }
         .header {
+            border-bottom: 2px solid #007bff;
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
+        }
+        .button_container {
+            display: flex;
+            gap: 10px;
+        }
+        .button_form button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .button_form.delete_btn button {
+            background-color: #dc3545;
+        }
+        .button_form.delete_btn button:hover {
+            background-color: #c82333;
         }
     </style>
     
 </head>
 <body>
     <div class="header">
-        <h1>📝 My Blog</h1>
+        <h1>Dashboard</h1>
         <div>
-            <a href="/home/register">Register</a> |
-            <a href="/home/login">Login</a>
+            <a href="/home/admin/add">Add</a>
         </div>
     </div>
     <% if (Array.isArray(articles) && articles.length > 0) { %>
         <ul class="articles-list">
-            <% articles.forEach(articles => { %>
-    <%
-    const date = new Date(articles.date);
-    const month = date.toLocaleString('default', { month: 'long' });
-    const day = date.getDate();
-    const year = date.getFullYear();
-        %>
+            <% articles.forEach(article => { %>
+   
                 <li class="article_box">
-                    <a href="home/articles/<%= articles.id %>"><%= articles.title %></a>
-                    <p><%= month %> <%= day %>, <%= year %></p>
+                    <a href="home/articles/<%= article.id %>"><%= article.title %></a>
+                    <div class="button_container">
+                        <form class="button_form" action="/home/admin/edit/<%= article.id %>" method="post">
+                            <button type="submit">Edit</button>
+                        </form>
+                        <form class="button_form delete_btn" action="/home/admin/delete/<%= article.id %>" method="post">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </div>
                 </li>
             <% }); %>
         </ul>

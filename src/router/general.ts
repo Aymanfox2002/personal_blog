@@ -25,15 +25,22 @@ public_users.post("/register", async (req, res) => {
 
     const newUsersList = [...usersList, { username, hashedPassword }];
     await fs.writeFile(usersFile, JSON.stringify(newUsersList, null, 2));
-    return res.send("New user added successfully!");
+    return res.redirect("/home/login");
   } catch (error) {
     console.log(error);
   }
 });
 
+// Register page layout
+public_users.get("/register", (req, res) => {
+  res.render("register");
+});
+
 // login user
 public_users.post("/login", async (req, res) => {
   const { username, password } = req.body;
+  // console.log("from server:")
+  // console.log({"username":username, "password": password})
   const usersList = await getUsers();
   // validate input
   if (!username || !password) {
@@ -54,10 +61,7 @@ public_users.post("/login", async (req, res) => {
      */
     if (await bcrypt.compare(password, user.hashedPassword)) {
       req.session.userName = username;
-      return res.status(200).json({
-        message: "Login successful",
-        session: req.session,
-      });
+      res.redirect("/home/admin");
     } else {
       return res.status(400).json({
         message: "Invalid password!",
@@ -68,10 +72,15 @@ public_users.post("/login", async (req, res) => {
   }
 });
 
-// home page
+// login page layout
+public_users.get("/login", (req, res) => {
+  res.render("login");
+});
+
+// home page layout
 public_users.get("/", async (req, res) => {
-  const data = await getArticles();
-  res.render("index", data); // Express looks in /views and finds users.ejs
+  const articles = await getArticles();
+  res.render("index", { articles }); // Express looks in /views and finds users.ejs
 });
 
 // get article with ID ❗❗
@@ -81,7 +90,7 @@ public_users.get("/articles/:id", async (req, res) => {
   const article = articlesList.find((ele: any) => ele.id === id);
 
   if (article) {
-    return res.send(article);
+    return res.render("article", { article });
   }
   return res.status(404).send(`Article with ID "${id}" not found`);
 });

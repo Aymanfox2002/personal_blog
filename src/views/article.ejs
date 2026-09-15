@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Blog</title>
+    <title><%= article.title %></title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -14,6 +14,7 @@
         }
         h1 {
             color: #333;
+            border-bottom: 2px solid #007bff;
             padding-bottom: 10px;
         }
         .articles-list {
@@ -37,45 +38,27 @@
             text-decoration: underline;
             color: #0056b3;
         }
-        .article_box{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
+        .article-date {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 50px;
+            font-family: courier, monospace;
         }
     </style>
-    
 </head>
 <body>
-    <div class="header">
-        <h1>📝 My Blog</h1>
-        <div>
-            <a href="/home/register">Register</a> |
-            <a href="/home/login">Login</a>
-        </div>
-    </div>
-    <% if (Array.isArray(articles) && articles.length > 0) { %>
-        <ul class="articles-list">
-            <% articles.forEach(articles => { %>
     <%
-    const date = new Date(articles.date);
+    const date = new Date(article.date);
     const month = date.toLocaleString('default', { month: 'long' });
     const day = date.getDate();
     const year = date.getFullYear();
         %>
-                <li class="article_box">
-                    <a href="home/articles/<%= articles.id %>"><%= articles.title %></a>
-                    <p><%= month %> <%= day %>, <%= year %></p>
-                </li>
-            <% }); %>
-        </ul>
+    <h1><%= article.title %></h1>
+    <p class="article-date"><%= month %> <%= day %>, <%= year %></p>
+    <% if (article) { %>
+      <p><%= article.content %></p>
     <% } else { %>
-        <p>No articles found.</p>
+        <p>No article found.</p>
     <% } %>
 </body>
 </html>

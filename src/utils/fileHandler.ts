@@ -32,7 +32,6 @@ export async function idGen() {
   try {
     const data = await getArticles();
     const id = data[data.length - 1].id + 1;
-    console.log(id);
     return id;
   } catch (error) {
     return 0;

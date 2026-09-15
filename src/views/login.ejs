@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f5f5f5;
+      }
+      h1 {
+        color: #333;
+        border-bottom: 2px solid #007bff;
+        padding-bottom: 10px;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        background: #fff;
+        padding: 24px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+      }
+      label {
+        color: #333;
+        font-weight: bold;
+      }
+      input {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font: inherit;
+      }
+      input:focus {
+        outline: 2px solid #b8d9ff;
+        border-color: #007bff;
+      }
+      button {
+        align-self: flex-start;
+        padding: 10px 18px;
+        border: 0;
+        border-radius: 4px;
+        background-color: #007bff;
+        color: #fff;
+        font: inherit;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+      @media (max-width: 600px) {
+        body {
+          padding: 16px;
+        }
+        form {
+          padding: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Login</h1>
+    <form action="/home/login" method="POST">
+      <label for="username">Username:</label>
+      <input type="text" value="Ayman" id="username" name="username" required />
+      <label for="password">Password:</label>
+      <input
+        type="password"
+        value="123"
+        id="password"
+        name="password"
+        required
+      />
+      <button type="submit">Login</button>
+    </form>
+  </body>
+</html>

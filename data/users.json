@@ -14,5 +14,13 @@
   {
     "username": "M.Ali",
     "hashedPassword": "$2b$10$sWPa8NLIll2EjqNRSBUfeO68nfqLV5p792TscIwRyx6Cl.IWeX6MW"
+  },
+  {
+    "username": "Babel",
+    "hashedPassword": "$2b$10$4tnkdu.YAzC..RQ7DLojGOwxjNJ7csxOeQnowkEF8nOq/yn8Svi5a"
+  },
+  {
+    "username": "Islam",
+    "hashedPassword": "$2b$10$di2J9W8U3cKQV/go5TtLSOzOFjgRwCJDfR2fbyh4um.whdU37CFCe"
   }
 ]

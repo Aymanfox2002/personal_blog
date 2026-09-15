@@ -8,6 +8,7 @@ import path from "path";
 const app = express();
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Set up session middleware
 app.use(

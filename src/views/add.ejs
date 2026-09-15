@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Article</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+        .article-date {
+            color: #666;
+            margin-bottom: 24px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            background: #fff;
+            padding: 24px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+        }
+        input,
+        textarea {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font: inherit;
+        }
+        textarea {
+            min-height: 180px;
+            resize: vertical;
+        }
+        input:focus,
+        textarea:focus {
+            outline: 2px solid #b8d9ff;
+            border-color: #007bff;
+        }
+        button {
+            align-self: flex-start;
+            padding: 10px 18px;
+            border: 0;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: #fff;
+            font: inherit;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 16px;
+            }
+            form {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+     <%
+    const date = new Date();
+    const month = date.toLocaleString('default', { month: 'long' });
+    const day = date.getDate();
+    const year = date.getFullYear();
+        %>
+    <h1>Add article</h1>
+    <p class="article-date"><%= month %> <%= day %>, <%= year %></p>
+   <form action="/home/admin/add" method="POST">
+    <input 
+    type="text"
+    name="title"
+    id="title"
+    placeholder="Article Title"
+    required>
+    
+    <textarea
+    name="content"
+    id="content"
+    placeholder="Article Content"
+    required></textarea>
+    
+    <button type="submit">Submit</button>
+   </form>
+</body>
+</html>
