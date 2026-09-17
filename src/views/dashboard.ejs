@@ -5,77 +5,235 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <style>
+        :root {
+            --ink: #1f2933;
+            --muted: #6b7280;
+            --line: #e5e7eb;
+            --paper: #ffffff;
+            --canvas: #f6f7f5;
+            --accent: #146c94;
+            --accent-dark: #0f526f;
+            --danger: #b42318;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
+            margin: 0;
+            padding: 48px 24px;
+            background: var(--canvas);
+            color: var(--ink);
+            font-family: "Avenir Next", "Segoe UI", sans-serif;
+        }
+
+        .page {
+            max-width: 900px;
             margin: 0 auto;
-            padding: 20px;
-            background-color: #f5f5f5;
         }
+
         h1 {
-            color: #333;
-            padding-bottom: 10px;
+            margin: 0;
+            font-family: Georgia, serif;
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 400;
+            letter-spacing: 0;
         }
+
+        .eyebrow {
+            margin: 0 0 10px;
+            color: var(--accent);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
         .articles-list {
-            list-style: none;
+            display: grid;
+            gap: 12px;
+            margin: 28px 0 0;
             padding: 0;
+            list-style: none;
         }
+
         .articles-list li {
-            background: white;
-            margin: 10px 0;
-            padding: 15px;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            min-height: 78px;
+            padding: 18px 20px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: var(--paper);
+            transition: border-color 160ms ease, transform 160ms ease;
         }
-        .articles-list a {
-            color: #007bff;
+
+        .articles-list li:hover {
+            border-color: #b8cdd6;
+            transform: translateY(-2px);
+        }
+
+        .article-title {
+            min-width: 0;
+            color: var(--ink);
+            font-family: Georgia, serif;
+            font-size: 1.2rem;
+            font-weight: 400;
             text-decoration: none;
-            font-size: 18px;
-            font-weight: bold;
+            overflow-wrap: anywhere;
         }
-        .articles-list a:hover {
-            text-decoration: underline;
-            color: #0056b3;
+
+        .article-title:hover {
+            color: var(--accent);
         }
+
         .article_box{
             display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
+
         .header {
-            border-bottom: 2px solid #007bff;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            gap: 20px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--line);
         }
+
+        .add-link,
+        .button_form a,
+        .button_form button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 36px;
+            padding: 8px 13px;
+            border: 1px solid transparent;
+            border-radius: 5px;
+            font: inherit;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease;
+        }
+
+        .add-link {
+            background: var(--accent);
+            color: #fff;
+            border: 1px black;
+        }
+
+        .add-link:hover {
+            background: var(--accent-dark);
+        }
+
+        .logout-form {
+            display: inline;
+            margin: 0;
+        }
+
+        .logout-button {
+            min-height: 36px;
+            padding: 8px 13px;
+            border: 1px solid #f0c9c5;
+            border-radius: 5px;
+            background: transparent;
+            color: var(--danger);
+            font: inherit;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 160ms ease, border-color 160ms ease;
+        }
+
+        .logout-button:hover {
+            border-color: #d99a93;
+            background: #fff5f4;
+        }
+
         .button_container {
             display: flex;
             gap: 10px;
+            flex-shrink: 0;
         }
+
+        .button_form a {
+            border-color: var(--line);
+            color: var(--accent-dark);
+        }
+
+        .button_form a:hover {
+            border-color: #b8cdd6;
+            background: #f2f8fa;
+        }
+
         .button_form button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+            background: transparent;
+            border-color: #f0c9c5;
+            color: var(--danger);
         }
-        .button_form.delete_btn button {
-            background-color: #dc3545;
+
+        .button_form button:hover {
+            background: #fff5f4;
         }
-        .button_form.delete_btn button:hover {
-            background-color: #c82333;
+
+        .empty-state {
+            margin-top: 28px;
+            padding: 36px 20px;
+            border: 1px dashed #cbd5d9;
+            border-radius: 8px;
+            color: var(--muted);
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 28px 16px;
+            }
+
+            .header,
+            .articles-list li {
+                align-items: flex-start;
+            }
+
+            .articles-list li {
+                flex-direction: column;
+            }
+
+            .button_container {
+                width: 100%;
+            }
+
+            .button_form,
+            .button_form a,
+            .button_form button {
+                flex: 1;
+            }
+            .add_logout_container{
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
         }
     </style>
     
 </head>
 <body>
+    <main class="page">
     <div class="header">
-        <h1>Dashboard</h1>
         <div>
-            <a href="/home/admin/add">Add</a>
+            <p class="eyebrow">Writing desk</p>
+        <h1>Dashboard</h1>
+        </div>
+        <div class="add_logout_container">
+            <a class="add-link" href="/home/admin/add">Add article</a>
+            <form action="/home/admin/logout" method="post" class="logout-form">
+                <button class="logout-button" type="submit">Log Out</button>
+            </form>
         </div>
     </div>
     <% if (Array.isArray(articles) && articles.length > 0) { %>
@@ -83,11 +241,11 @@
             <% articles.forEach(article => { %>
    
                 <li class="article_box">
-                    <a href="home/articles/<%= article.id %>"><%= article.title %></a>
+                    <a href="/home/articles/<%= article.id %>"><%= article.title %></a>
                     <div class="button_container">
-                        <form class="button_form" action="/home/admin/edit/<%= article.id %>" method="post">
-                            <button type="submit">Edit</button>
-                        </form>
+                        <div class="button_form">
+                            <a href="/home/admin/update/<%= article.id %>" type="submit">Edit</a>
+                        </div>
                         <form class="button_form delete_btn" action="/home/admin/delete/<%= article.id %>" method="post">
                             <button type="submit">Delete</button>
                         </form>
@@ -96,7 +254,8 @@
             <% }); %>
         </ul>
     <% } else { %>
-        <p>No articles found.</p>
+        <p class="empty-state">No articles found.</p>
     <% } %>
+    </main>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Article</title>
+    <title>Update</title>
     <style>
         :root {
             --ink: #1f2933;
@@ -33,16 +33,10 @@
         }
 
         h1 {
-            margin: 0;
+            margin: 0 0 28px;
             font-family: Georgia, serif;
             font-size: clamp(2rem, 5vw, 3rem);
             font-weight: 400;
-        }
-
-        .article-date {
-            margin: 12px 0 28px;
-            color: var(--muted);
-            font-size: 0.85rem;
         }
 
         form {
@@ -120,27 +114,21 @@
 <body>
 <main class="form-page">
     <a class="back-link" href="/home/admin">&larr; Dashboard</a>
-     <%
-    const date = new Date();
-    const month = date.toLocaleString('default', { month: 'long' });
-    const day = date.getDate();
-    const year = date.getFullYear();
-        %>
-    <h1>Add article</h1>
-    <p class="article-date"><%= month %> <%= day %>, <%= year %></p>
-   <form action="/home/admin/add" method="POST">
-    <input 
+    <h1>Update Article</h1>
+   <form action="/home/admin/update/<%= idVal %>" method="Post">
+    <input
+    value="<%= title %>"
     type="text"
     name="title"
     id="title"
     placeholder="Article Title"
-    required>
+    >
     
     <textarea
     name="content"
     id="content"
     placeholder="Article Content"
-    required></textarea>
+    ><%= content %></textarea>
     
     <button type="submit">Submit</button>
    </form>

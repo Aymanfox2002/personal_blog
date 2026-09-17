@@ -5,80 +5,125 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
     <style>
+      :root {
+        --ink: #1f2933;
+        --muted: #6b7280;
+        --line: #e5e7eb;
+        --paper: #ffffff;
+        --canvas: #f6f7f5;
+        --accent: #146c94;
+        --accent-dark: #0f526f;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
       body {
-        font-family: Arial, sans-serif;
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-        background-color: #f5f5f5;
+        display: grid;
+        min-height: 100vh;
+        margin: 0;
+        place-items: center;
+        padding: 28px 16px;
+        background: var(--canvas);
+        color: var(--ink);
+        font-family: "Avenir Next", "Segoe UI", sans-serif;
       }
+
+      .auth-page {
+        width: min(100%, 440px);
+      }
+
       h1 {
-        color: #333;
-        border-bottom: 2px solid #007bff;
-        padding-bottom: 10px;
+        margin: 0 0 28px;
+        font-family: Georgia, serif;
+        font-size: 3rem;
+        font-weight: 400;
       }
+
       form {
         display: flex;
         flex-direction: column;
         gap: 14px;
-        background: #fff;
-        padding: 24px;
-        border: 1px solid #ddd;
-        border-radius: 6px;
+        padding: 28px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--paper);
       }
+
       label {
-        color: #333;
-        font-weight: bold;
+        color: var(--ink);
+        font-size: 0.9rem;
+        font-weight: 700;
       }
+
       input {
-        box-sizing: border-box;
         width: 100%;
-        padding: 12px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
+        padding: 13px 14px;
+        border: 1px solid #cbd5d9;
+        border-radius: 5px;
+        background: #fff;
+        color: var(--ink);
         font: inherit;
       }
+
       input:focus {
-        outline: 2px solid #b8d9ff;
-        border-color: #007bff;
+        outline: 3px solid #d8edf5;
+        border-color: var(--accent);
       }
+
       button {
         align-self: flex-start;
-        padding: 10px 18px;
-        border: 0;
-        border-radius: 4px;
-        background-color: #007bff;
+        padding: 11px 18px;
+        border: 1px solid var(--accent);
+        border-radius: 5px;
+        background: var(--accent);
         color: #fff;
+        font-weight: 700;
         font: inherit;
         cursor: pointer;
       }
+
       button:hover {
-        background-color: #0056b3;
+        background: var(--accent-dark);
       }
+
+      .auth-link {
+        display: inline-block;
+        margin-bottom: 28px;
+        color: var(--accent);
+        font-size: 0.9rem;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .auth-link:hover {
+        text-decoration: underline;
+      }
+
       @media (max-width: 600px) {
-        body {
-          padding: 16px;
-        }
         form {
-          padding: 16px;
+          padding: 20px;
         }
       }
     </style>
   </head>
   <body>
+    <main class="auth-page">
+    <a class="auth-link" href="/home">&larr; Back to blog</a>
     <h1>Login</h1>
     <form action="/home/login" method="POST">
       <label for="username">Username:</label>
-      <input type="text" value="Ayman" id="username" name="username" required />
+      <input type="text" id="username" name="username" required />
       <label for="password">Password:</label>
       <input
         type="password"
-        value="123"
         id="password"
         name="password"
         required
       />
       <button type="submit">Login</button>
     </form>
+    </main>
   </body>
 </html>

@@ -5,55 +5,142 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Blog</title>
     <style>
+        :root {
+            --ink: #1f2933;
+            --muted: #6b7280;
+            --line: #e5e7eb;
+            --paper: #ffffff;
+            --canvas: #f6f7f5;
+            --accent: #146c94;
+            --accent-dark: #0f526f;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
+            margin: 0;
+            padding: 48px 24px;
+            background: var(--canvas);
+            color: var(--ink);
+            font-family: "Avenir Next", "Segoe UI", sans-serif;
+        }
+
+        .page {
+            max-width: 900px;
             margin: 0 auto;
-            padding: 20px;
-            background-color: #f5f5f5;
         }
+
         h1 {
-            color: #333;
-            padding-bottom: 10px;
+            margin: 0;
+            font-family: Georgia, serif;
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 400;
         }
+
         .articles-list {
-            list-style: none;
+            display: grid;
+            gap: 12px;
+            margin: 28px 0 0;
             padding: 0;
+            list-style: none;
         }
+
         .articles-list li {
-            background: white;
-            margin: 10px 0;
-            padding: 15px;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .articles-list a {
-            color: #007bff;
-            text-decoration: none;
-            font-size: 18px;
-            font-weight: bold;
-        }
-        .articles-list a:hover {
-            text-decoration: underline;
-            color: #0056b3;
-        }
-        .article_box{
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 20px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: var(--paper);
+            transition: border-color 160ms ease, transform 160ms ease;
         }
+
+        .articles-list li:hover {
+            border-color: #b8cdd6;
+            transform: translateY(-2px);
+        }
+
+        .article-title {
+            color: var(--ink);
+            font-family: Georgia, serif;
+            font-size: 1.25rem;
+            text-decoration: none;
+            overflow-wrap: anywhere;
+        }
+
+        .article-title:hover {
+            color: var(--accent);
+        }
+
+        .article-date {
+            flex-shrink: 0;
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            gap: 20px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .header p {
+            margin: 0 0 10px;
+            color: var(--accent);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .header a {
+            color: var(--accent-dark);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .header a:hover {
+            color: var(--accent);
+        }
+
+        .empty-state {
+            margin-top: 28px;
+            padding: 36px 20px;
+            border: 1px dashed #cbd5d9;
+            border-radius: 8px;
+            color: var(--muted);
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 28px 16px;
+            }
+
+            .articles-list li {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 8px;
+            }
         }
     </style>
     
 </head>
 <body>
+    <main class="page">
     <div class="header">
-        <h1>📝 My Blog</h1>
+        <div>
+            <p>Personal journal</p>
+            <h1>My Blog</h1>
+        </div>
         <div>
             <a href="/home/register">Register</a> |
             <a href="/home/login">Login</a>
@@ -69,13 +156,14 @@
     const year = date.getFullYear();
         %>
                 <li class="article_box">
-                    <a href="home/articles/<%= articles.id %>"><%= articles.title %></a>
-                    <p><%= month %> <%= day %>, <%= year %></p>
+                    <a class="article-title" href="/home/articles/<%= articles.id %>"><%= articles.title %></a>
+                    <p class="article-date"><%= month %> <%= day %>, <%= year %></p>
                 </li>
             <% }); %>
         </ul>
     <% } else { %>
-        <p>No articles found.</p>
+        <p class="empty-state">No articles found.</p>
     <% } %>
+    </main>
 </body>
 </html>

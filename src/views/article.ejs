@@ -5,48 +5,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= article.title %></title>
     <style>
+        :root {
+            --ink: #1f2933;
+            --muted: #6b7280;
+            --line: #e5e7eb;
+            --canvas: #f6f7f5;
+            --accent: #146c94;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
+            margin: 0;
+            padding: 64px 24px;
+            background: var(--canvas);
+            color: var(--ink);
+            font-family: "Avenir Next", "Segoe UI", sans-serif;
+        }
+
+        .article-page {
+            max-width: 740px;
             margin: 0 auto;
-            padding: 20px;
-            background-color: #f5f5f5;
         }
+
         h1 {
-            color: #333;
-            border-bottom: 2px solid #007bff;
-            padding-bottom: 10px;
+            margin: 0;
+            font-family: Georgia, serif;
+            font-size: clamp(2.2rem, 6vw, 4.5rem);
+            font-weight: 400;
+            line-height: 1.05;
         }
-        .articles-list {
-            list-style: none;
-            padding: 0;
-        }
-        .articles-list li {
-            background: white;
-            margin: 10px 0;
-            padding: 15px;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .articles-list a {
-            color: #007bff;
-            text-decoration: none;
-            font-size: 18px;
-            font-weight: bold;
-        }
-        .articles-list a:hover {
-            text-decoration: underline;
-            color: #0056b3;
-        }
+
         .article-date {
-            color: #666;
-            font-size: 14px;
-            margin-bottom: 50px;
-            font-family: courier, monospace;
+            margin: 18px 0 52px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid var(--line);
+            color: var(--muted);
+            font-size: 0.85rem;
+            letter-spacing: 0.04em;
+        }
+
+        .article-content {
+            font-family: Georgia, serif;
+            font-size: 1.2rem;
+            line-height: 1.85;
+            white-space: pre-wrap;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 40px;
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
+<main class="article-page">
+    <a class="back-link" href="/home">&larr; All articles</a>
     <%
     const date = new Date(article.date);
     const month = date.toLocaleString('default', { month: 'long' });
@@ -56,9 +80,10 @@
     <h1><%= article.title %></h1>
     <p class="article-date"><%= month %> <%= day %>, <%= year %></p>
     <% if (article) { %>
-      <p><%= article.content %></p>
+    <p class="article-content"><%= article.content %></p>
     <% } else { %>
         <p>No article found.</p>
     <% } %>
+</main>
 </body>
 </html>

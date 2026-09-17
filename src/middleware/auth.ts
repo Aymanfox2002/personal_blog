@@ -1,4 +1,5 @@
 import type { Request, Response, NextFunction } from "express";
+import session from "express-session";
 
 // Middleware to check if the user is authenticated
 export const requireAuth = (req: Request, res: Response, next: NextFunction) => {

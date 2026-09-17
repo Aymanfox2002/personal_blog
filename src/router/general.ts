@@ -39,8 +39,6 @@ public_users.get("/register", (req, res) => {
 // login user
 public_users.post("/login", async (req, res) => {
   const { username, password } = req.body;
-  // console.log("from server:")
-  // console.log({"username":username, "password": password})
   const usersList = await getUsers();
   // validate input
   if (!username || !password) {
